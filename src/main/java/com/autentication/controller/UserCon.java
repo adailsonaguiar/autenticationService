@@ -1,6 +1,8 @@
 package com.autentication.controller;
 
+import com.autentication.model.Roles;
 import com.autentication.model.Usuario;
+import com.autentication.repository.RoleRepo;
 import com.autentication.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +17,14 @@ import java.util.List;
 public class UserCon {
 
     private EntityManager em;
+    private final UserRepo userRepo;
+    private final RoleRepo roleRepo;
+
     @Autowired
-    private UserRepo userRepo;
+    public UserCon(RoleRepo roleRepo, UserRepo userRepo) {
+        this.roleRepo = roleRepo;
+        this.userRepo = userRepo;
+    }
 
     @GetMapping("/all")
     public List<Usuario> getAll() {
@@ -26,8 +34,10 @@ public class UserCon {
     @PostMapping(path = "/add")
     public ResponseEntity insertUser(@RequestParam String nome, @RequestParam String cpf, @RequestParam String email, @RequestParam String password) {
         try{
-            Usuario n = new Usuario(nome, cpf, email, password);
+            Usuario n = new Usuario(nome, cpf, email, password, true);
             userRepo.save(n);
+            Roles r = new Roles(n.getUsername(),"ADMIN");
+            roleRepo.save(r);
             return ResponseEntity.ok().body(n);
         }catch(Exception e){
             e.printStackTrace();
