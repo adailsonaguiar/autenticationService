@@ -1,5 +1,6 @@
 package com.autentication.config;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,7 @@ import javax.sql.DataSource;
 public class SegurancaConfig extends WebSecurityConfigurerAdapter {
 
     final
-    DataSource dataSource;
+    private DataSource dataSource;
 
     @Autowired
     public SegurancaConfig(DataSource dataSource) {
@@ -37,6 +38,7 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        /*
         http.csrf().disable()
                 .authorizeRequests()
                 .anyRequest().authenticated()
@@ -44,6 +46,17 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                */
+        http
+                // starts authorizing configurations
+                .antMatcher("/rest/private/**")
+                .authorizeRequests()
+                .anyRequest().authenticated().and()
+
+                .httpBasic().and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+
+                .csrf().disable();
     }
 
     @Bean
