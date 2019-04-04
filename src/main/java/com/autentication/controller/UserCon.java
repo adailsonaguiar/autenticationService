@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/rest/user")
+@RequestMapping(value = "/rest/public")
 public class UserCon {
 
     private EntityManager em;
@@ -24,11 +24,6 @@ public class UserCon {
     public UserCon(RoleRepo roleRepo, UserRepo userRepo) {
         this.roleRepo = roleRepo;
         this.userRepo = userRepo;
-    }
-
-    @GetMapping("/all")
-    public List<Usuario> getAll() {
-        return userRepo.findAll();
     }
 
     @PostMapping(path = "/add")
@@ -45,6 +40,7 @@ public class UserCon {
         }
     }
 
+    /*
     @PostMapping(path = "login")
     public ResponseEntity login(@RequestParam String user, @RequestParam String password) {
         if (user.equals("adailsonacj") && password.equals("123")) {
@@ -52,6 +48,8 @@ public class UserCon {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("usuário sem permissão!");
     }
+
+     */
 
 //    @PostMapping(path = "login")
 //    public Response login(@Context HttpHeaders httpHeaders, @RequestParam String user, @RequestParam String password) {
