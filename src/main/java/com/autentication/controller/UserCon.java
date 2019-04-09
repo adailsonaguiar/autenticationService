@@ -27,6 +27,7 @@ public class UserCon {
         this.userRepo = userRepo;
     }
 
+    @CrossOrigin
     @PostMapping(path = "/add")
     public ResponseEntity insertUser(@RequestParam(value = "nome") String nome, @RequestParam(value = "cpf") String cpf, @RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
         try {
