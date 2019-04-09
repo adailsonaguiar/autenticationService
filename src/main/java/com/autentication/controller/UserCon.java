@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/public")
 public class UserCon {
@@ -27,7 +28,6 @@ public class UserCon {
         this.userRepo = userRepo;
     }
 
-    @CrossOrigin(methods = RequestMethod.POST)
     @PostMapping(path = "/add")
     public ResponseEntity insertUser(@RequestParam(value = "nome") String nome, @RequestParam(value = "cpf") String cpf, @RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
         try {
