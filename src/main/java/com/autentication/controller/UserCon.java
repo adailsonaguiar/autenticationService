@@ -28,7 +28,7 @@ public class UserCon {
         this.userRepo = userRepo;
     }
 
-    @GetMapping(path = "/add")
+    @PostMapping(path = "/add")
     public ResponseEntity insertUser(@RequestParam(value = "nome") String nome, @RequestParam(value = "cpf") String cpf, @RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
         try {
             Usuario n = new Usuario(nome, cpf, email, password, true);
