@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/auth")
 public class AutenticationCon {

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/public")
 public class UserCon {
